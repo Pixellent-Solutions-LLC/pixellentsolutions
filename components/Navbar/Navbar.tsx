@@ -1,8 +1,8 @@
 'use client';
 
+import { cva, type VariantProps } from 'class-variance-authority';
 import Link from 'next/link';
 import { useState } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
 
 const navbar = cva(
