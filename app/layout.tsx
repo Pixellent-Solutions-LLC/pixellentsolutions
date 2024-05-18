@@ -1,9 +1,14 @@
-import "styles/tailwind.css"
+'use client';
 
+import "styles/tailwind.css";
+import { Navbar } from "components/Navbar/Navbar";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
-  )
+  );
 }
