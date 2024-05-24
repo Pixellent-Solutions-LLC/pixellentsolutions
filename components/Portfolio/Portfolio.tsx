@@ -22,7 +22,7 @@ const portfolioGrid = cva(
 );
 
 const portfolioItem = cva(
-  'text-center p-8 bg-gray-800 rounded-lg shadow-lg border border-gray-700 transition transform hover:shadow-hover relative' // Apply hover effect
+  'text-center p-8 bg-gray-800 rounded-lg shadow-lg border border-gray-700 transition hover:shadow-hover relative' // Apply hover effect
 );
 
 const portfolioImage = cva(

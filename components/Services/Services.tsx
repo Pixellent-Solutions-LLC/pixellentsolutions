@@ -1,7 +1,7 @@
 'use client';
 
 import { cva } from 'class-variance-authority';
-import { FaCode, FaMobileAlt, FaLaptopCode } from 'react-icons/fa';
+import { FaCode, FaLaptopCode, FaMobileAlt } from 'react-icons/fa';
 
 const servicesContainer = cva(
   'bg-gray-900 py-12'
