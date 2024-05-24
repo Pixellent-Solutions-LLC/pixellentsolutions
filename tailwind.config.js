@@ -16,6 +16,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'hover': '0 10px 20px rgba(0, 0, 0, 0.25)',
+      },
+      transitionProperty: {
+        'height': 'height',
+        'spacing': 'margin, padding',
+      },
       colors: {
         primary: {
           50: "#eff6ff",
