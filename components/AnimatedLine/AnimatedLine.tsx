@@ -15,7 +15,7 @@ const sections: Section[] = [
   { id: 'contact', offsetTop: 0 }
 ];
 
-const AnimatedLine:React.FC =  () => {
+const AnimatedLine = () => {
   const lineRef = useRef<HTMLDivElement>(null);
   const [sectionOffsets, setSectionOffsets] = useState<Section[]>(sections);
 
@@ -37,7 +37,7 @@ const AnimatedLine:React.FC =  () => {
       if (lineRef.current) {
         let lineHeight = 0;
         for (let i = 0; i < sectionOffsets.length; i++) {
-          if (scrollPosition >= sectionOffsets[i]?.offsetTop ?? 0) {
+          if (scrollPosition >= (sectionOffsets[i]?.offsetTop ?? 0)) {
             lineHeight = (i + 1) * 20; // adjust this multiplier to control the height increase per section
           }
         }

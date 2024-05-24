@@ -1,8 +1,8 @@
 'use client';
 
+import { cva } from 'class-variance-authority';
 import Image from 'next/image';
 import { Button } from '../Button/Button';
-import { cva } from 'class-variance-authority';
 
 const heroContainer = cva(
   'flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 text-white text-center border border-gray-700 rounded-lg'

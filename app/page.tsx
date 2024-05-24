@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
-import Footer from '../components/Footer/Footer';
 import AnimatedLine from '../components/AnimatedLine/AnimatedLine';
 import Contact from '../components/Contact/Contact';
+import Footer from '../components/Footer/Footer';
+import Hero from '../components/Hero/Hero';
 import Portfolio from '../components/Portfolio/Portfolio';
 import Services from '../components/Services/Services';
 import Testimonials from '../components/Testimonials/Testimonials';
-import Hero from '../components/Hero/Hero';
 
 export const metadata: Metadata = {
   title: 'Pixellent Solutions LLC',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
       {
         width: 1200,
         height: 630,
-        url: 'assets/logo2.png',
+        url: '/assets/logo2.png',
       },
     ],
   },
