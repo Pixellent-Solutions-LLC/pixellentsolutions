@@ -31,6 +31,14 @@ export interface NavbarProps extends VariantProps<typeof navbar> {
 export const Navbar: React.FC<NavbarProps> = ({ className, color }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleSmoothScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+    event.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className={twMerge(navbar({ color }), className)}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,16 +49,16 @@ export const Navbar: React.FC<NavbarProps> = ({ className, color }) => {
             </Link>
           </div>
           <div className="hidden md:flex md:items-center md:space-x-4">
-            <Link href="/" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
+            {/* <Link href="/" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
               Home
-            </Link>
-            <Link href="/services" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
+            </Link> */}
+            <Link href="/#services" scroll={false} className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" onClick={(e) => handleSmoothScroll(e, 'services')}>
               Services
             </Link>
-            <Link href="/portfolio" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
+            <Link href="/#portfolio" scroll={false} className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" onClick={(e) => handleSmoothScroll(e, 'portfolio')}>
               Portfolio
             </Link>
-            <Link href="/contact" className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
+            <Link href="/#contact" scroll={false} className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" onClick={(e) => handleSmoothScroll(e, 'contact')}>
               Contact
             </Link>
           </div>
@@ -84,16 +92,16 @@ export const Navbar: React.FC<NavbarProps> = ({ className, color }) => {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link href="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
+            {/* <Link href="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
               Home
-            </Link>
-            <Link href="/services" className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
+            </Link> */}
+            <Link href="/#services" scroll={false} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" onClick={(e) => handleSmoothScroll(e, 'services')}>
               Services
             </Link>
-            <Link href="/portfolio" className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
+            <Link href="/#portfolio" scroll={false} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" onClick={(e) => handleSmoothScroll(e, 'portfolio')}>
               Portfolio
             </Link>
-            <Link href="/contact" className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
+            <Link href="/#contact" scroll={false} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" onClick={(e) => handleSmoothScroll(e, 'contact')}>
               Contact
             </Link>
           </div>

@@ -16,6 +16,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        middlePartAnimation: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      animation: {
+        middlePart: 'middlePartAnimation 1s forwards',
+      },
       boxShadow: {
         'hover': '0 10px 20px rgba(0, 0, 0, 0.25)',
       },
