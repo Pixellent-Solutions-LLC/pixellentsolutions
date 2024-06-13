@@ -2,7 +2,7 @@
 
 import { cva } from 'class-variance-authority';
 import Image from 'next/image';
-import { Button } from '../Button/Button';
+import FancyButton from '../FancyButton/FancyButton';
 
 const heroContainer = cva(
   'flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 text-white text-center border border-gray-700 rounded-lg'
@@ -27,8 +27,8 @@ export default function Hero() {
       <h1 className={heroHeadline()}>Welcome to Pixellent Solutions LLC</h1>
       <p className={heroSubheadline()}>Transforming your business with cutting-edge solutions</p>
       <div className={heroButtons()}>
-        <Button href="#services" intent="primary">Get Started</Button>
-        <Button href="#contact" intent="secondary">Contact Us</Button>
+        <FancyButton text="Get Started" colorVariant="green" />
+        <FancyButton text="Contact Us" colorVariant="blue" />
       </div>
     </section>
   );
