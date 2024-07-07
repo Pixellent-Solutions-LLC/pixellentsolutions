@@ -48,15 +48,16 @@ const PortfolioItem: React.FC<{ project: Project }> = ({ project }) => {
   use3DEffect(itemRef);
 
   return (
-    <div ref={itemRef} className={`${portfolioItem()} portfolio-item`}>
+    <div ref={itemRef} className={portfolioItem()}>
       <Image src={project.image} alt={project.name} className={portfolioImage()} width={400} height={200} />
       <h3 className={portfolioName()}>{project.name}</h3>
       <p className={portfolioDescription()}>{project.description}</p>
     </div>
   );
 };
+
 export default function Portfolio() {
-    const projects: Project[] = [
+  const projects: Project[] = [
     { name: 'Project 1', image: '/assets/project1.png', description: 'Description of project 1 showcasing the work done.' },
     { name: 'Project 2', image: '/assets/project1.png', description: 'Description of project 2 showcasing the work done.' },
     { name: 'Project 3', image: '/assets/project2.png', description: 'Description of project 3 showcasing the work done.' },
@@ -64,14 +65,14 @@ export default function Portfolio() {
 
   return (
     <section id="portfolio" className={portfolioContainer()}>
-    <div className={portfolioWrapper()}>
-      <h2 className={portfolioTitle()}>Our Portfolio</h2>
-      <div className={portfolioGrid()}>
-        {projects.map((project, index) => (
-          <PortfolioItem key={index} project={project} />
-        ))}
+      <div className={portfolioWrapper()}>
+        <h2 className={portfolioTitle()}>Our Portfolio</h2>
+        <div className={portfolioGrid()}>
+          {projects.map((project, index) => (
+            <PortfolioItem key={index} project={project} />
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
   );
 }

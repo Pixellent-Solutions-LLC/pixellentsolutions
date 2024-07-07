@@ -56,7 +56,7 @@ const AnimatedLine = () => {
   }, [sectionOffsets]);
 
   return (
-    <div className="fixed top-0 left-0 w-1 bg-blue-500 transition-all duration-300" ref={lineRef} />
+    <div className="fixed top-0 left-0 w-1 bg-green-500 transition-all duration-300" ref={lineRef} />
   );
 };
 
