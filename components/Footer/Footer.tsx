@@ -1,7 +1,7 @@
 'use client';
 
 import { cva } from 'class-variance-authority';
-import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const footerContainer = cva(
   'bg-gray-800 text-white py-8'
@@ -50,13 +50,13 @@ export default function Footer() {
           <div className={footerColumn()}>
             <h4 className={footerTitle()}>Follow Us</h4>
             <div className={socialIcons()}>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/profile.php?id=61562338671967" target="_blank" rel="noopener noreferrer">
                 <FaFacebook size={24} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                <FaTwitter size={24} />
+              <a href="https://instagram.com/pixellentsolutions" target="_blank" rel="noopener noreferrer">
+                <FaInstagram size={24} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://linkedin.com/company/pixellentsolutions-llc/" target="_blank" rel="noopener noreferrer">
                 <FaLinkedin size={24} />
               </a>
             </div>
