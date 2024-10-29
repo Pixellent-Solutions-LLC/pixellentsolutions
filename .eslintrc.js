@@ -19,6 +19,9 @@ module.exports = {
     "tailwindcss/no-custom-classname": "off",
     "testing-library/prefer-screen-queries": "off",
     "@next/next/no-html-link-for-pages": "off",
+    "react/no-unescaped-entities": "off",
+    "tailwindcss/migration-from-tailwind-2": "off",
+    "tailwindcss/enforces-shorthand": "off",
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
@@ -26,44 +29,40 @@ module.exports = {
         varsIgnorePattern: "^_",
       },
     ],
-    "sort-imports": [
-      "error",
-      {
-        ignoreCase: true,
-        ignoreDeclarationSort: true,
-      },
-    ],
+    "sort-imports":"off",
     "tailwindcss/classnames-order": "off",
-    "import/order": [
-      1,
-      {
-        groups: ["external", "builtin", "internal", "sibling", "parent", "index"],
-        pathGroups: [
-          ...getDirectoriesToSort().map((singleDir) => ({
-            pattern: `${singleDir}/**`,
-            group: "internal",
-          })),
-          {
-            pattern: "env",
-            group: "internal",
-          },
-          {
-            pattern: "theme",
-            group: "internal",
-          },
-          {
-            pattern: "public/**",
-            group: "internal",
-            position: "after",
-          },
-        ],
-        pathGroupsExcludedImportTypes: ["internal"],
-        alphabetize: {
-          order: "asc",
-          caseInsensitive: true,
-        },
-      },
-    ],
+     "import/order": "off",
+    // [
+    //   1,
+    //   {
+    //     groups: ["external", "builtin", "internal", "sibling", "parent", "index"],
+    //     pathGroups: [
+    //       ...getDirectoriesToSort().map((singleDir) => ({
+    //         pattern: `${singleDir}/**`,
+    //         group: "internal",
+    //       })),
+    //       {
+    //         pattern: "env",
+    //         group: "internal",
+    //       },
+    //       {
+    //         pattern: "theme",
+    //         group: "internal",
+    //       },
+    //       {
+    //         pattern: "public/**",
+    //         group: "internal",
+    //         position: "after",
+    //       },
+    //     ],
+    //     pathGroupsExcludedImportTypes: ["internal"],
+    //     alphabetize: {
+    //       order: "asc",
+    //       caseInsensitive: true,
+    //     },
+    //   },
+    // ],
+    
   },
 }
 
