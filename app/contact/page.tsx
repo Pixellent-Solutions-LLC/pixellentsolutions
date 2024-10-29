@@ -3,8 +3,9 @@
 import { cva } from 'class-variance-authority';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { FiMail, FiArrowLeft, FiArrowRight, FiSend } from 'react-icons/fi';
+import { FiMail, FiArrowLeft, FiArrowRight, FiSend , FiCheck} from 'react-icons/fi';
 import { sectionTitle } from 'components/Portfolio/Portfolio';
+import { useRouter } from 'next/navigation';
 
 
 const contactContainer = cva([
@@ -78,6 +79,31 @@ const popover = cva([
   'whitespace-nowrap', // Prevent text wrapping
 ]);
 
+
+const successOverlay = cva([
+  'fixed inset-0 bg-slate-900/80',
+  'backdrop-blur-sm',
+  'z-50',
+  'flex items-center justify-center',
+]);
+
+const successCard = cva([
+  'bg-gradient-to-b from-white/10 to-white/5',
+  'border border-white/10',
+  'rounded-2xl p-8',
+  'flex flex-col items-center',
+  'backdrop-blur-md',
+  'max-w-md mx-4',
+]);
+
+const successIcon = cva([
+  'w-16 h-16 rounded-full',
+  'bg-gradient-to-r from-green-500 to-emerald-500',
+  'flex items-center justify-center',
+  'text-white text-3xl',
+  'mb-4',
+]);
+
 interface ContactStep {
   id: number;
   title: string;
@@ -102,6 +128,8 @@ const steps: ContactStep[] = [
 ] as const;
 
 export default function Contact() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [showError, setShowError] = useState(false);
 
@@ -149,12 +177,39 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+  const validateForm = () => {
+    return (
+      formData.name.trim() !== '' &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
+      formData.message.trim() !== ''
+    );
   };
-
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Check if we're on the last step and if all fields are filled
+    if (currentStep !== steps.length) {
+      e.preventDefault();
+      handleNext();
+      return;
+    }
+  
+    // Validate entire form before submission
+    if (!validateForm()) {
+      setShowError(true);
+      setTimeout(() => setShowError(false), 3000);
+      return;
+    }
+    
+    // Form is valid, proceed with submission
+    console.log('Form submitted:', formData);
+    setIsSubmitted(true);
+    
+    // Redirect after 2 seconds
+    setTimeout(() => {
+      router.push('/');
+    }, 2000);
+  };
   return (
     <section id="contact" className={contactContainer()}>
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-transparent" />
@@ -181,7 +236,7 @@ export default function Contact() {
               <FiMail className={contactIcon()} />
               <div>
                 <h3 className="text-white font-medium mb-1">Email Us</h3>
-                <p>info@pixellentsolutions.com</p>
+                <p>info@pixellent-solutions.com</p>
               </div>
             </div>
             {/* ... keep other contact info items ... */}
@@ -252,6 +307,51 @@ export default function Contact() {
                   )}
                 </motion.div>
               </AnimatePresence>
+              <AnimatePresence>
+        {isSubmitted && (
+          <motion.div
+            className={successOverlay()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className={successCard()}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", damping: 15 }}
+            >
+              <motion.div
+                className={successIcon()}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring", damping: 10 }}
+              >
+                <FiCheck />
+              </motion.div>
+              
+              <motion.h3
+                className="text-2xl font-bold text-white mb-2 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                Message Sent Successfully!
+              </motion.h3>
+              
+              <motion.p
+                className="text-gray-300 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                Thank you for reaching out. We'll get back to you soon!
+              </motion.p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
             </div>
             </div>
 
@@ -267,24 +367,23 @@ export default function Contact() {
     </button>
   )}
   
-  {currentStep < steps.length ? (
-    <button
-      type="button"
-      onClick={handleNext}
-      className={submitButton()}
-    >
-      Next
-      <FiArrowRight />
-    </button>
-  ) : (
-    <button
-      type="submit"
-      className={submitButton()}
-    >
-      Send
-      <FiSend />
-    </button>
-  )}
+  <button
+    type={currentStep === steps.length ? "submit" : "button"}
+    onClick={currentStep === steps.length ? undefined : handleNext}
+    className={submitButton()}
+  >
+    {currentStep === steps.length ? (
+      <>
+        <span>Send</span>
+        <FiSend />
+      </>
+    ) : (
+      <>
+        <span>Next</span>
+        <FiArrowRight />
+      </>
+    )}
+  </button>
 </div>
             {/* Progress indicator */}
             <div className="flex justify-between mt-8">

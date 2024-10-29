@@ -183,7 +183,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
             </Link>
             
             <Link 
-              href="/#contact" 
+              href="/contact" 
               className={mobileLink()} 
             >
               Contact
