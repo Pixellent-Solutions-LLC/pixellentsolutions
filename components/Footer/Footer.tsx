@@ -3,6 +3,8 @@
 import { cva } from 'class-variance-authority';
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { relative } from 'path';
 
 const footerContainer = cva([
   'relative bg-slate-900/95',
@@ -45,19 +47,16 @@ const socialIcon = cva([
   'transition-colors duration-300',
 ]);
 
-const footerBottom = cva([
-  'pt-8 mt-8 border-t border-white/10',
-  'text-center text-gray-400',
-]);
+
 
 export default function Footer() {
   return (
     <footer className={footerContainer()}>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent -z-10" />
       
       <div className={footerWrapper()}>
         <motion.div 
-          className={footerGrid()}
+          className={`${footerGrid()} relative z-10`} 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -72,20 +71,22 @@ export default function Footer() {
           <div className={footerColumn()}>
             <h4 className={footerTitle()}>Quick Links</h4>
             <nav className="flex flex-col">
-              <a href="/" className={footerLink()}>Home</a>
-              <a href="/services" className={footerLink()}>Services</a>
-              <a href="/portfolio" className={footerLink()}>Portfolio</a>
-              <a href="/contact" className={footerLink()}>Contact</a>
+              <Link href="/" className={footerLink()}>Home</Link>
+              <Link href="/services" className={footerLink()}>Services</Link>
+              <Link href="/portfolio" className={footerLink()}>Portfolio</Link>
+              <Link href="/inquiry" className={footerLink()}>Project Inquiry</Link>
+              <Link href="/contact" className={footerLink()}>Contact</Link>
             </nav>
           </div>
           
           <div className={footerColumn()}>
             <h4 className={footerTitle()}>Services</h4>
             <nav className="flex flex-col">
-              <a href="/services#web" className={footerLink()}>Web Development</a>
-              <a href="/services#mobile" className={footerLink()}>Mobile Apps</a>
-              <a href="/services#design" className={footerLink()}>UI/UX Design</a>
-              <a href="/services#consulting" className={footerLink()}>Consulting</a>
+              <Link href="/services#web" className={footerLink()}>Web Development</Link>
+              <Link href="/services#mobile" className={footerLink()}>Mobile Apps</Link>
+              <Link href="/services#design" className={footerLink()}>UI/UX Design</Link>
+              <Link href="/services#consulting" className={footerLink()}>Consulting</Link>
+              <Link href="/inquiry" className={footerLink()}>Request Quote</Link>
             </nav>
           </div>
           
@@ -93,42 +94,32 @@ export default function Footer() {
             <h4 className={footerTitle()}>Connect</h4>
             <p className="text-gray-400 mb-4">Follow us on social media</p>
             <div className={socialIcons()}>
-              <a 
+              <Link 
                 href="https://www.facebook.com/profile.php?id=61562338671967" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className={socialIcon()}
               >
                 <FaFacebook size={24} />
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="https://instagram.com/pixellentsolutions" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className={socialIcon()}
               >
                 <FaInstagram size={24} />
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="https://linkedin.com/company/pixellentsolutions-llc/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className={socialIcon()}
               >
                 <FaLinkedin size={24} />
-              </a>
+              </Link>
             </div>
           </div>
-        </motion.div>
-
-        <motion.div 
-          className={footerBottom()}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          &copy; {new Date().getFullYear()} Pixellent Solutions LLC. All rightss reserved.
         </motion.div>
       </div>
     </footer>

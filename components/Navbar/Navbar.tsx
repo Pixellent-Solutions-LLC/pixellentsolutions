@@ -115,17 +115,22 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
             <div className={navLinkUnderline()} />
           </Link>
           <Link 
-            href="/#portfolio" 
+            href="/portfolio" 
             className={navLink()} 
-            onClick={(e) => handleSmoothScroll(e, 'portfolio')}
           >
             Portfolio
             <div className={navLinkUnderline()} />
           </Link>
           <Link 
-            href="/#contact" 
+            href="/inquiry" 
             className={navLink()} 
-            onClick={(e) => handleSmoothScroll(e, 'contact')}
+          >
+            Inquiry
+            <div className={navLinkUnderline()} />
+          </Link>
+          <Link 
+            href="/contact" 
+            className={navLink()} 
           >
             Contact
             <div className={navLinkUnderline()} />
@@ -164,16 +169,22 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
               Services
             </Link>
             <Link 
-              href="/#portfolio" 
+              href="/portfolio" 
               className={mobileLink()} 
-              onClick={(e) => handleSmoothScroll(e, 'portfolio')}
             >
               Portfolio
             </Link>
             <Link 
+              href="/inquiry" 
+              className={mobileLink()} 
+              onClick={(e) => handleSmoothScroll(e, 'inquiry')}
+            >
+              Inquiry
+            </Link>
+            
+            <Link 
               href="/#contact" 
               className={mobileLink()} 
-              onClick={(e) => handleSmoothScroll(e, 'contact')}
             >
               Contact
             </Link>
