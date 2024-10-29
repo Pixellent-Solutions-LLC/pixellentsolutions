@@ -1,7 +1,6 @@
 'use client';
 
 import { cva } from 'class-variance-authority';
-import Image from 'next/image';
 import { motion } from 'framer-motion'; // We'll add animations
 import FancyButton from '../FancyButton/FancyButton';
 import NetworkSphere from 'components/3DElement/NetworkSphere';

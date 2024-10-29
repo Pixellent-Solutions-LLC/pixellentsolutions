@@ -4,13 +4,10 @@ const meta: Meta<typeof Navbar> = {
   title: "Navbar",
   component: Navbar,
   args: {
-    color: "light",
+   
   },
   argTypes: {
-    color: {
-      options: ["light", "dark"],
-      control: { type: "select" },
-    },
+    
   },
 };
 
