@@ -96,7 +96,6 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <FancyButton text="Start Your Journey" colorVariant="primary" />
             <FancyButton text="View Our Work" colorVariant="secondary" />
           </motion.div>
         </div>
