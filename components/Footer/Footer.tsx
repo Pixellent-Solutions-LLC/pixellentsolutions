@@ -128,7 +128,7 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          &copy; {new Date().getFullYear()} Pixellent Solutions LLC. All rights reserved.
+          &copy; {new Date().getFullYear()} Pixellent Solutions LLC. All rightss reserved.
         </motion.div>
       </div>
     </footer>
