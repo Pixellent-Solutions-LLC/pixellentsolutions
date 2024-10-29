@@ -9,6 +9,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import FancyButton from 'components/FancyButton/FancyButton';
 
+
+
+const menuVariants = {
+  open: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30
+    }
+  },
+  closed: { 
+    opacity: 0, 
+    y: "-100%",
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30
+    }
+  }
+};
+
 const navbar = cva([
   'fixed w-full z-50 transition-all duration-300',
 ], {
@@ -38,24 +61,17 @@ const navLogo = cva([
 
 
 const navLinks = cva([
-  'fixed top-0 left-0 h-full', // Changed to full height from top
-  'w-[400px]', // Wider menu
-  'bg-slate-900/95 backdrop-blur-md', // Darker background with more blur
-  'border-r border-white/10',
+  'fixed top-0 left-0 h-full',
+  'w-[400px]',
+  'bg-slate-900/95 backdrop-blur-md',
+  'border-r-2 border-white/25', // Updated this line to be more visible
+  'border-t border-white/25', // Added borders for all sides
   'shadow-2xl',
   'z-[41]',
   'flex flex-col',
-  'pt-20', // Add padding top to account for header
+  'pt-20',
 ]);
 
-const mobileMenuButton = cva([
-  'absolute left-4', // Almost at the edge
-  'flex items-center',
-  'p-2 rounded-lg',
-  'border border-white/10',
-  'hover:bg-white/5',
-  'transition-colors duration-300',
-]);
 
 const mobileLink = cva([
   'block px-8 py-4', // Increased padding
@@ -65,36 +81,27 @@ const mobileLink = cva([
   'text-lg', // Larger text
 ]);
 
-const inquiryButton = cva([
-  'px-6 py-2',
-  'border border-white/10',
-  'hover:bg-white/5',
-  'transition-colors duration-300',
-  'rounded-lg',
-  'text-gray-300',
-]);
+
 // Add the animation variants
 const variants = {
-  open: { 
-    opacity: 1, 
-    x: 0,
+  open: (height = 1000) => ({
+    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
     transition: {
       type: "spring",
-      stiffness: 300,
-      damping: 30
+      stiffness: 20,
+      restDelta: 2
     }
-  },
-  closed: { 
-    opacity: 0, 
-    x: "-100%",
+  }),
+  closed: {
+    clipPath: "circle(30px at 40px 40px)",
     transition: {
+      delay: 0.5,
       type: "spring",
-      stiffness: 300,
-      damping: 30
+      stiffness: 400,
+      damping: 40
     }
   }
 };
-
 
 export interface NavbarProps extends VariantProps<typeof navbar> {
   className?: string;
@@ -112,6 +119,18 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  
+    // Cleanup function to ensure scroll is restored when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   const handleSmoothScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
     event.preventDefault();
@@ -173,6 +192,8 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              variants={menuVariants}
+
               onClick={() => setIsOpen(false)}
             />
             <motion.div 
