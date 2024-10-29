@@ -1,62 +1,153 @@
 'use client';
 
 import { cva } from 'class-variance-authority';
-import { FaCode, FaLaptopCode, FaMobileAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FiCode, FiLayout, FiSmartphone, FiTrendingUp } from 'react-icons/fi';
 
-const servicesContainer = cva(
-  'bg-gray-900 py-12'
-);
+const servicesContainer = cva([
+  'relative py-24 bg-slate-900',
+  'overflow-hidden',
+]);
 
-const servicesWrapper = cva(
-  'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'
-);
+const servicesContent = cva([
+  'max-w-7xl mx-auto px-4',
+  'flex flex-col items-center',
+]);
 
-const servicesTitle = cva(
-  'text-3xl font-extrabold text-center text-white mb-12'
-);
+const sectionTitle = cva([
+  'text-4xl lg:text-5xl font-bold text-center',
+  'bg-clip-text text-transparent',
+  'bg-gradient-to-r from-purple-400 to-pink-400',
+  'mb-4',
+]);
 
-const servicesGrid = cva(
-  'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
-);
+const sectionSubtitle = cva([
+  'text-xl text-gray-400 text-center',
+  'max-w-2xl mb-16',
+]);
 
-const serviceItem = cva(
-  'text-center p-8 bg-gray-800 rounded-lg shadow-lg border border-gray-700'
-);
+const servicesGrid = cva([
+  'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
+  'gap-8 w-full',
+]);
 
-const serviceIcon = cva(
-  'text-blue-400 mb-4'
-);
+const serviceCard = cva([
+  'relative p-6 rounded-xl',
+  'bg-gradient-to-b from-white/5 to-white/[0.02]',
+  'border border-white/10',
+  'backdrop-blur-sm',
+  'group hover:border-purple-500/50',
+  'transition-all duration-300',
+]);
 
-const serviceTitle = cva(
-  'text-xl font-semibold text-white mb-2'
-);
+const serviceIcon = cva([
+  'text-4xl mb-4',
+  'text-purple-400',
+  'group-hover:text-purple-300',
+  'transition-colors duration-300',
+]);
 
-const serviceDescription = cva(
-  'text-gray-400'
-);
+const serviceTitle = cva([
+  'text-xl font-semibold mb-3',
+  'text-white',
+]);
+
+const serviceDescription = cva([
+  'text-gray-400',
+  'group-hover:text-gray-300',
+  'transition-colors duration-300',
+]);
+
+const services = [
+  {
+    icon: FiCode,
+    title: 'Web Development',
+    description: 'Custom web applications built with cutting-edge technologies.',
+  },
+  {
+    icon: FiSmartphone,
+    title: 'Mobile Development',
+    description: 'Native and cross-platform mobile applications.',
+  },
+  {
+    icon: FiLayout,
+    title: 'UI/UX Design',
+    description: 'Beautiful, intuitive interfaces that users love.',
+  },
+  {
+    icon: FiTrendingUp,
+    title: 'Digital Marketing',
+    description: 'Data-driven strategies to grow your online presence.',
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
 export default function Services() {
   return (
-    <section id="services" className={servicesContainer()}>
-      <div className={servicesWrapper()}>
-        <h2 className={servicesTitle()}>Our Services</h2>
-        <div className={servicesGrid()}>
-          <div className={serviceItem()}>
-            <FaCode className={serviceIcon()} size={48} />
-            <h3 className={serviceTitle()}>Web Development</h3>
-            <p className={serviceDescription()}>Creating responsive and dynamic web applications using the latest technologies.</p>
-          </div>
-          <div className={serviceItem()}>
-            <FaMobileAlt className={serviceIcon()} size={48} />
-            <h3 className={serviceTitle()}>Mobile App Development</h3>
-            <p className={serviceDescription()}>Building high-performance mobile applications for iOS and Android.</p>
-          </div>
-          <div className={serviceItem()}>
-            <FaLaptopCode className={serviceIcon()} size={48} />
-            <h3 className={serviceTitle()}>Custom Software Solutions</h3>
-            <p className={serviceDescription()}>Developing custom software solutions tailored to your business needs.</p>
-          </div>
-        </div>
+    <section className={servicesContainer()}>
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-transparent" />
+      
+      <div className={servicesContent()}>
+        <motion.h2 
+          className={sectionTitle()}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Our Services
+        </motion.h2>
+        
+        <motion.p 
+          className={sectionSubtitle()}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          We offer comprehensive digital solutions to help your business thrive in the modern world.
+        </motion.p>
+
+        <motion.div 
+          className={servicesGrid()}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              className={serviceCard()}
+              variants={itemVariants}
+            >
+              <service.icon className={serviceIcon()} />
+              <h3 className={serviceTitle()}>{service.title}</h3>
+              <p className={serviceDescription()}>{service.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

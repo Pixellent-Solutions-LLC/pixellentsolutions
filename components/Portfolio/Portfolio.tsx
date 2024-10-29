@@ -1,77 +1,148 @@
 'use client';
 
 import { cva } from 'class-variance-authority';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useRef } from 'react';
-import { use3DEffect } from '../../hooks/use3DEffect';
+import FancyButton from '../FancyButton/FancyButton';
 
-const portfolioContainer = cva(
-  'bg-gray-900 py-12'
-);
 
-const portfolioWrapper = cva(
-  'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'
-);
+export const sectionTitle = cva([
+  'text-4xl lg:text-5xl font-bold text-center',
+  'bg-clip-text text-transparent',
+  'bg-gradient-to-r from-purple-400 to-pink-400',
+  'mb-4',
+]);
 
-const portfolioTitle = cva(
-  'text-3xl font-extrabold text-center text-white mb-12'
-);
+export const sectionSubtitle = cva([
+  'text-xl text-gray-400 text-center',
+  'max-w-2xl mb-16',
+  'mx-auto',
+]);
 
-const portfolioGrid = cva(
-  'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
-);
+const portfolioContainer = cva([
+  'relative py-24 bg-slate-900',
+]);
 
-const portfolioItem = cva(
-  'text-center p-8 bg-gray-800 rounded-lg shadow-lg border border-gray-700 transition hover:shadow-hover relative' // Apply hover effect
-);
+const portfolioContent = cva([
+  'max-w-7xl mx-auto px-4',
+]);
 
-const portfolioImage = cva(
-  'w-full h-48 object-cover mb-4'
-);
+const portfolioGrid = cva([
+  'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+  'gap-8 mt-16',
+]);
 
-const portfolioName = cva(
-  'text-xl font-semibold text-white mb-2'
-);
+const projectCard = cva([
+  'group relative rounded-xl overflow-hidden',
+  'aspect-[4/3]',
+]);
 
-const portfolioDescription = cva(
-  'text-gray-400'
-);
+const projectImage = cva([
+  'w-full h-full object-cover',
+  'transition-transform duration-500',
+  'group-hover:scale-110',
+]);
 
-interface Project {
-  name: string;
-  image: string;
-  description: string;
-}
+const projectOverlay = cva([
+  'absolute inset-0',
+  'bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent',
+  'opacity-0 group-hover:opacity-100',
+  'transition-opacity duration-300',
+  'flex flex-col justify-end p-6',
+]);
 
-const PortfolioItem: React.FC<{ project: Project }> = ({ project }) => {
-  const itemRef = useRef<HTMLDivElement>(null);
-  use3DEffect(itemRef);
+const projectTitle = cva([
+  'text-xl font-semibold text-white mb-2',
+]);
 
-  return (
-    <div ref={itemRef} className={portfolioItem()}>
-      <Image src={project.image} alt={project.name} className={portfolioImage()} width={400} height={200} />
-      <h3 className={portfolioName()}>{project.name}</h3>
-      <p className={portfolioDescription()}>{project.description}</p>
-    </div>
-  );
-};
+const projectDescription = cva([
+  'text-gray-300 mb-4',
+]);
+
+const projects = [
+  {
+    title: 'E-Commerce Platform',
+    description: 'Modern e-commerce solution with advanced features',
+    image: '/assets/project1.png',
+  },
+  {
+    title: 'Mobile Banking App',
+    description: 'Secure and user-friendly banking application',
+    image: '/assets/project1.png',
+  },
+  {
+    title: 'Healthcare Dashboard',
+    description: 'Comprehensive analytics platform for healthcare providers',
+    image: '/assets/project2.png',
+  },
+  // Add more projects as needed
+];
 
 export default function Portfolio() {
-  const projects: Project[] = [
-    { name: 'Project 1', image: '/assets/project1.png', description: 'Description of project 1 showcasing the work done.' },
-    { name: 'Project 2', image: '/assets/project1.png', description: 'Description of project 2 showcasing the work done.' },
-    { name: 'Project 3', image: '/assets/project2.png', description: 'Description of project 3 showcasing the work done.' },
-  ];
-
   return (
-    <section id="portfolio" className={portfolioContainer()}>
-      <div className={portfolioWrapper()}>
-        <h2 className={portfolioTitle()}>Our Portfolio</h2>
-        <div className={portfolioGrid()}>
+    <section className={portfolioContainer()}>
+      <div className={portfolioContent()}>
+        <motion.h2 
+          className={sectionTitle()}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Our Work
+        </motion.h2>
+        
+        <motion.p 
+          className={sectionSubtitle()}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          Explore our latest projects and success stories
+        </motion.p>
+
+        <motion.div 
+          className={portfolioGrid()}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.2,
+              },
+            },
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {projects.map((project, index) => (
-            <PortfolioItem key={index} project={project} />
+            <motion.div
+              key={index}
+              className={projectCard()}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.5 },
+                },
+              }}
+            >
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className={projectImage()}
+              />
+              <div className={projectOverlay()}>
+                <h3 className={projectTitle()}>{project.title}</h3>
+                <p className={projectDescription()}>{project.description}</p>
+                <FancyButton text="View Project" colorVariant="secondary" />
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

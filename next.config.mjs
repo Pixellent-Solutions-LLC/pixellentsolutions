@@ -8,6 +8,26 @@ import { env } from "./env.mjs"
 const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
   reactStrictMode: true,
   experimental: { instrumentationHook: true },
+  transpilePackages: ['three', '@react-three/drei', '@react-three/fiber'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+        port: '',
+        pathname: '/api/**',
+      },
+    ],
+  },
+  
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'webgl-sdf-generator': false,
+      'bidi-js': false,
+    };
+    return config;
+  },
   rewrites() {
     return [
       { source: "/healthz", destination: "/api/health" },
@@ -17,5 +37,6 @@ const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
     ]
   },
 })
+
 
 export default config
