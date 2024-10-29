@@ -177,7 +177,6 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
             <Link 
               href="/inquiry" 
               className={mobileLink()} 
-              onClick={(e) => handleSmoothScroll(e, 'inquiry')}
             >
               Inquiry
             </Link>
