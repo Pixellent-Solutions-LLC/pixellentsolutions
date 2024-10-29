@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { FiMail, FiArrowLeft, FiArrowRight, FiSend } from 'react-icons/fi';
-import { sectionTitle, sectionSubtitle } from 'components/Portfolio/Portfolio';
+import { sectionTitle } from 'components/Portfolio/Portfolio';
 
 
 const contactContainer = cva([
@@ -43,13 +43,7 @@ const contactForm = cva([
   'backdrop-blur-sm',
 ]);
 
-const formGroup = cva([
-  'mb-6',
-]);
 
-const formLabel = cva([
-  'block text-sm font-medium text-gray-300 mb-2',
-]);
 
 const formInput = cva([
   'w-full px-4 py-3 rounded-lg',
@@ -59,15 +53,7 @@ const formInput = cva([
   'focus:outline-none focus:border-purple-500',
   'transition duration-300',
 ]);
-const formTextarea = cva([
-  'w-full px-4 py-3 rounded-lg',
-  'bg-slate-800/50',
-  'border border-white/10',
-  'text-white placeholder-gray-400',
-  'focus:outline-none focus:border-purple-500',
-  'transition duration-300',
-  'h-32 resize-none',
-]);
+
 
 const submitButton = cva([
   'px-6 py-2 rounded-lg',

@@ -1,6 +1,5 @@
 'use client';
 
-import { cva } from 'class-variance-authority';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -44,7 +43,7 @@ const projects = [
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [hoveredProject, setHoveredProject] = useState(null);
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const filteredProjects = projects.filter(project => 
     selectedCategory === 'All' || project.category === selectedCategory

@@ -4,7 +4,6 @@ import { cva } from 'class-variance-authority';
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { relative } from 'path';
 
 const footerContainer = cva([
   'relative bg-slate-900/95',

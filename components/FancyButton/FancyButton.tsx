@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import { motion } from 'framer-motion';
-
+import Link from 'next/link';
 const buttonStyles = cva(
   [
     'relative overflow-hidden rounded-lg px-6 py-3',
@@ -35,9 +35,25 @@ const buttonStyles = cva(
 interface FancyButtonProps extends VariantProps<typeof buttonStyles> {
   text: string;
   onClick?: () => void;
+  href?: string;
 }
 
-export default function FancyButton({ text, colorVariant, onClick }: FancyButtonProps) {
+export default function FancyButton({ text, colorVariant, onClick, href }: FancyButtonProps) {
+  if (href) {
+    return (
+      <Link href={href}>
+        <motion.button
+          className={buttonStyles({ colorVariant })}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          {text}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-shimmer" />
+        </motion.button>
+      </Link>
+    );
+  }
+
   return (
     <motion.button
       className={buttonStyles({ colorVariant })}
