@@ -61,24 +61,25 @@ const navLogo = cva([
 
 
 const navLinks = cva([
-  'fixed top-0 left-0 h-full',
+  'fixed top-0 left-0 h-screen',
   'w-[400px]',
   'bg-slate-900/95 backdrop-blur-md',
-  'border-r-2 border-white/25', // Updated this line to be more visible
-  'border-t border-white/25', // Added borders for all sides
+  'border-r-2 border-white/25', 
+  'border-t border-white/25', 
   'shadow-2xl',
   'z-[41]',
   'flex flex-col',
-  'pt-20',
+  'px-4',
+  'overflow-y-auto',
 ]);
 
 
 const mobileLink = cva([
-  'block px-8 py-4', // Increased padding
+  'block py-4', 
   'text-gray-300 hover:text-white',
   'hover:bg-white/5',
   'transition-colors duration-300',
-  'text-lg', // Larger text
+  'text-lg', 
 ]);
 
 
@@ -119,6 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -146,20 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
       <div className={navContent()}>
         {/* Left - Logo/Menu button */}
         <div className="flex items-center gap-4">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-2"
-            aria-label="Toggle menu"
-          >
-            <svg className="h-6 w-6 text-gray-300" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-              {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-          <Link href="/" className={navLogo()}>
+        <Link href="/" className={navLogo()}>
               <Image
               src="/assets/logo2.png"
               alt="Logo" 
@@ -167,6 +156,8 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
               height={80}
             />
           </Link>
+         
+          
         </div>
 
         {/* Center - Title (hidden on mobile, visible on md and up) */}
@@ -176,13 +167,37 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
           </Link>
         </div>
 
-        {/* Right - Inquiry Button */}
+       
         <Link 
           href="/inquiry" 
         >
                    <FancyButton text="Start Your Project" colorVariant="primary" />
 
         </Link>
+        <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-7 left-[100px] p-2 z-[42]"
+        aria-label="Toggle menu"
+      >
+        <motion.svg 
+          className="h-6 w-6 text-gray-300"
+          stroke="currentColor" 
+          fill="none" 
+          viewBox="0 0 24 24"
+          animate={isOpen ? "open" : "closed"}
+          variants={{
+            open: { rotate: 90 },
+            closed: { rotate: 0 }
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {isOpen ? (
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          ) : (
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+          )}
+        </motion.svg>
+      </button>
       </div>
       <AnimatePresence>
         {isOpen && (
@@ -204,15 +219,17 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
               variants={variants}
             >
               {/* Close button at the top */}
-              <button
-                onClick={() => setIsOpen(false)}
-                className="absolute top-7 left-8 p-2"
-                aria-label="Close menu"
-              >
-                <svg className="h-6 w-6 text-gray-300" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+              <div className="h-20 flex items-center justify-between">
+                <Link href="/" className={navLogo()}>
+                  <Image
+                    src="/assets/logo2.png"
+                    alt="Logo" 
+                    width={80}
+                    height={80}
+                  />
+                </Link>
+               
+              </div>
 
               <div className="flex flex-col pt-12">
                 <Link 
