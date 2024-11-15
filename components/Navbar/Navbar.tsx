@@ -50,7 +50,7 @@ const navContent = cva([
   'w-full',
   'px-4',
   'flex items-center justify-between',
-  'h-20',
+  'h-20 md:h-28',
 ]);
 
 
@@ -149,12 +149,12 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
         {/* Left - Logo/Menu button */}
         <div className="flex items-center gap-4">
         <Link href="/" className={navLogo()}>
-              <Image
-              src="/assets/logo2.png"
-              alt="Logo" 
-              width={80}
-              height={80}
-            />
+        <Image
+  src="/assets/logo2.png"
+  alt="Logo" 
+  width={100}
+  height={100}
+/>
           </Link>
          
           
@@ -219,14 +219,14 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
               variants={variants}
             >
               {/* Close button at the top */}
-              <div className="h-20 flex items-center justify-between">
+              <div className="h-[79px] md:h-28 flex items-center justify-between">
                 <Link href="/" className={navLogo()}>
-                  <Image
-                    src="/assets/logo2.png"
-                    alt="Logo" 
-                    width={80}
-                    height={80}
-                  />
+                <Image
+  src="/assets/logo2.png"
+  alt="Logo" 
+  width={100}
+  height={100}
+/>
                 </Link>
                
               </div>

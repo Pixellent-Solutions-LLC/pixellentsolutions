@@ -4,6 +4,7 @@ import { cva } from 'class-variance-authority';
 import { motion } from 'framer-motion'; // We'll add animations
 import FancyButton from '../FancyButton/FancyButton';
 import NetworkSphere from 'components/3DElement/NetworkSphere';
+import ParticleLetterP from 'components/3DElement/ParticleLetterP';
 
 const heroContainer = cva([
   'relative min-h-screen flex items-center justify-center',
@@ -107,6 +108,7 @@ export default function Hero() {
   transition={{ duration: 0.8 }}
 >
   <NetworkSphere />
+  {/* <ParticleLetterP /> */}
 </motion.div>
       </div>
     </section>

@@ -59,14 +59,14 @@ const submitButton = cva([
 ]);
 
 const popover = cva([
-    'absolute -top-16 left-1/2 transform -translate-x-1/2', // Moved up slightly
-    'bg-red-500 text-white px-6 py-3 rounded-lg', // Made bigger and more solid
-    'text-sm font-medium',
-    'shadow-lg',
-    'z-50', // Ensure it's above other elements
-    'animate-bounce',
-    'whitespace-nowrap', // Prevent text wrapping
-  ]);
+  'fixed top-40 left-1/2 transform -translate-x-1/2', // Changed to fixed positioning
+  'bg-red-500 text-white px-6 py-3 rounded-lg',
+  'text-sm font-medium',
+  'shadow-lg',
+  'z-[9999]', // Increased z-index to be above everything
+  'animate-bounce',
+  'whitespace-nowrap',
+]);
   
   
   const successOverlay = cva([
@@ -173,6 +173,18 @@ export default function InquiryPage() {
     };
   return (
     <section className={inquiryContainer()}>
+       <AnimatePresence>
+        {showError && (
+          <motion.div 
+            className={popover()}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            {errorMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-transparent" />
       
       <div className={inquiryContent()}>
@@ -195,11 +207,7 @@ export default function InquiryPage() {
         <div className="relative w-full">
 
 
-        {showError && (
-            <div className={popover()}>
-              {errorMessage}
-            </div>
-          )}
+       
 
         <motion.form 
           className={formContainer()}
